@@ -93,7 +93,13 @@ spec:
           {{- end }}
           {{- range $item := .Values.zabbixWebService.extraEnv }}
           - name: {{ $item.name }}
-            value: {{ $item.value | quote  }}
+          {{- if $item.value }}
+            value: {{ $item.value | quote }}
+          {{- end }}
+          {{- with $item.valueFrom }}
+            valueFrom:
+              {{- toYaml . | nindent 14 }}
+          {{- end }}
           {{- end }}
           - name: ZBX_ALLOWEDIP
             value: "::/0"

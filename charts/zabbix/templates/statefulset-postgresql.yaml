@@ -107,7 +107,13 @@ spec:
               value: /var/lib/postgresql/data/pgdata
             {{- range $item := .Values.postgresql.extraEnv }}
             - name: {{ $item.name }}
+            {{- if $item.value }}
               value: {{ $item.value | quote }}
+            {{- end }}
+            {{- with $item.valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
             {{- end }}
           {{- with .Values.postgresql.envFrom }}
           envFrom:

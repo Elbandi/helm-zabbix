@@ -90,7 +90,13 @@ spec:
           {{- include "zabbix.postgresAccess.variables" (list $ . "zabbix") | nindent 10 }}
           {{- range $item := .Values.zabbixWeb.extraEnv }}
           - name: {{ $item.name }}
+          {{- if $item.value }}
             value: {{ $item.value | quote }}
+          {{- end }}
+          {{- with $item.valueFrom }}
+            valueFrom:
+              {{- toYaml . | nindent 14 }}
+          {{- end }}
           {{- end }}
         {{- with .Values.zabbixWeb.envFrom }}
         envFrom:

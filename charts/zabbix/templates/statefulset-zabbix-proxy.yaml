@@ -114,7 +114,13 @@ spec:
               value: {{ .Values.zabbixAgent.ZBX_LOADMODULE | quote }}
             {{- range $item := .Values.zabbixAgent.extraEnv }}
             - name: {{ $item.name }}
+            {{- if $item.value }}
               value: {{ $item.value | quote }}
+            {{- end }}
+            {{- with $item.valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
             {{- end }}
           {{- with .Values.zabbixAgent.envFrom }}
           envFrom:
@@ -173,7 +179,13 @@ spec:
               value: {{ .Values.zabbixProxy.ZBX_VMWARECACHESIZE | quote }}
             {{- range $item := .Values.zabbixProxy.extraEnv }}
             - name: {{ $item.name }}
+            {{- if $item.value }}
               value: {{ $item.value | quote }}
+            {{- end }}
+            {{- with $item.valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
             {{- end }}
           ports:
             - name: zabbix-proxy

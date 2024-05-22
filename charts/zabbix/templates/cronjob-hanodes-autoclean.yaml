@@ -63,7 +63,13 @@ spec:
             {{- include "zabbix.postgresAccess.variables" (list $ . "db_client") | nindent 12 }}
             {{- range $item := .Values.zabbixServer.haNodesAutoClean.extraEnv }}
             - name: {{ $item.name }}
+            {{- if $item.value }}
               value: {{ $item.value | quote }}
+            {{- end }}
+            {{- with $item.valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
             {{- end }}
             {{- with .Values.zabbixServer.haNodesAutoClean.envFrom }}
             envFrom:

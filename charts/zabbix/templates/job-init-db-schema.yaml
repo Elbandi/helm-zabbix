@@ -75,7 +75,13 @@ spec:
           {{- include "zabbix.postgresAccess.variables" (list $ . "zabbix") | nindent 10 }}
           {{- range $item := .Values.zabbixServer.extraEnv }}
           - name: {{ $item.name }}
+          {{- if $item.value }}
             value: {{ $item.value | quote }}
+          {{- end }}
+          {{- with $item.valueFrom }}
+            valueFrom:
+              {{- toYaml . | nindent 14 }}
+          {{- end }}
           {{- end }}
           - name: ZBX_AUTOHANODENAME
             value: "hostname"

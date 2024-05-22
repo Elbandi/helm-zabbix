@@ -117,7 +117,13 @@ spec:
               value: {{ .Values.zabbixJavaGateway.ZABBIX_OPTIONS | quote }}
             {{- range $item := .Values.zabbixJavaGateway.extraEnv }}
             - name: {{ $item.name }}
+            {{- if $item.value }}
               value: {{ $item.value | quote }}
+            {{- end }}
+            {{- with $item.valueFrom }}
+              valueFrom:
+                {{- toYaml . | nindent 16 }}
+            {{- end }}
             {{- end }}
           {{- with .Values.zabbixJavaGateway.envFrom }}
           envFrom:
