@@ -182,6 +182,10 @@ spec:
             - name: ZBX_WEBDRIVERURL
               value: http://{{ template "zabbix.fullname" . }}-{{ .Values.zabbixBrowserMonitoring.webdriver.name }}:{{ .Values.zabbixBrowserMonitoring.webdriver.port }}
             {{- end }}
+          {{- with .Values.zabbixServer.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.zabbixServer.extraVolumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
@@ -253,6 +257,10 @@ spec:
             {{- with .Values.zabbixAgent.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- with .Values.zabbixAgent.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - name: zabbix-agent
               containerPort: 10050
