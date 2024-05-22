@@ -115,6 +115,10 @@ spec:
             {{- with .Values.zabbixAgent.extraEnv }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+          {{- with .Values.zabbixAgent.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: proc
               mountPath: /hostfs/proc

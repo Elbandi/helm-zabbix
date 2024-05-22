@@ -103,6 +103,8 @@ zabbixServer:
     deleteOlderThanSeconds: 3600
     # -- Requests and limits of pod resources. See: [https://kubernetes.io/docs/concepts/configuration/manage-resources-containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers)
     resources: {}
+    # -- Extra environment variables from secrets or configmaps
+    envFrom: []
     # -- Extra environment variables. A list of additional environment variables.
     extraEnv: []
     # -- Additional volumeMounts to the cronjob hanodes autoclean
@@ -176,6 +178,8 @@ zabbixServer:
     # -- Annotations for the zabbix-server service
     annotations: {}
     # metallb.universe.tf/address-pool: production-public-ips
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/server-pgsql/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   #- name: ENABLE_TIMESCALEDB
@@ -249,6 +253,8 @@ postgresql:
   # -- Extra Postgresql runtime parameters ("-c" options)
   extraRuntimeParameters:
     max_connections: 50
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables.
   extraEnv: []
   # -- Annotations to add to the statefulset
@@ -353,6 +359,8 @@ zabbixProxy:
     # -- Annotations for the zabbix-proxy service
     annotations: {}
     # metallb.universe.tf/address-pool: production-public-ips
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/proxy-sqlite3/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   # -- Annotations to add to the statefulset
@@ -463,6 +471,8 @@ zabbixAgent:
     # metallb.universe.tf/address-pool: production-public-ips
   # -- If true, agent pods mounts host / at /host/root
   hostRootFsMount: true
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/agent2/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   # -- Additional volumeMounts to the zabbix Agent container
@@ -569,6 +579,8 @@ zabbixWeb:
     # -- Annotations for the Zabbix Web
     annotations: {}
     # metallb.universe.tf/address-pool: production-public-ips
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/web-apache-pgsql/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   #  - name: ZBX_SSO_SETTINGS
@@ -653,6 +665,8 @@ zabbixWebService:
     # -- Annotations for the Zabbix Web Service
     annotations: {}
     # metallb.universe.tf/address-pool: production-public-ips
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/web-service/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   # -- Annotations to add to the deployment
@@ -751,6 +765,8 @@ zabbixJavaGateway:
     # -- Annotations for the zabbix-java-gateway service
     annotations: {}
     # metallb.universe.tf/address-pool: production-public-ips
+  # -- Extra environment variables from secrets or configmaps
+  envFrom: []
   # -- Extra environment variables. A list of additional environment variables. List can be extended with other environment variables listed here: https://github.com/zabbix/zabbix-docker/tree/6.0/Dockerfiles/agent2/alpine#environment-variables. See example: https://github.com/zabbix-community/helm-zabbix/blob/master/charts/zabbix/docs/example/kind/values.yaml
   extraEnv: []
   # -- Additional volumeMounts to the Zabbix Java Gateway container
